@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快速 MBTI 测试 (16题)</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #1e1e1e;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #252525;
+            border-radius: 8px;
+        }
+        .question-title {
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        .option {
+            display: block;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #333;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+        .option:hover {
+            background: #444;
+        }
+        .option input {
+            margin-right: 12px;
+            accent-color: #00adb5;
+            transform: scale(1.2);
+        }
+        .option.selected {
+            border-color: #00adb5;
+            background: #2a3b3e;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: #00adb5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #008c95;
+        }
+        .result-box {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+            background: #252525;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px solid #00adb5;
+        }
+        .result-emoji {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        .result-title {
+            font-size: 2.5rem;
+            color: #00adb5;
+            margin-bottom: 5px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .result-name {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .result-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ccc;
+            text-align: left;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🧠 快速 MBTI 测试 (16题)</h1>
+    
+    <form id="mbti-form">
+        <!-- 第一部分 -->
+        <div class="section-title">第一部分：能量来源</div>
+        <div class="question">
+            <div class="question-title">1. 聚会后你通常感到：</div>
+            <label class="option"><input type="radio" name="q1" value="E"> A. 精力充沛</label>
+            <label class="option"><input type="radio" name="q1" value="I"> B. 精疲力尽，需要独处</label>
+        </div>
+        <div class="question">
+            <div class="question-title">2. 你更倾向于：</div>
+            <label class="option"><input type="radio" name="q2" value="E"> A. 先说了再想</label>
+            <label class="option"><input type="radio" name="q2" value="I"> B. 想好了再说</label>
+        </div>
+        <div class="question">
+            <div class="question-title">3. 遇到问题时你更可能：</div>
+            <label class="option"><input type="radio" name="q3" value="E"> A. 说出来，和别人讨论</label>
+            <label class="option"><input type="radio" name="q3" value="I"> B. 自己先想清楚</label>
+        </div>
+        <div class="question">
+            <div class="question-title">4. 你更喜欢：</div>
+            <label class="option"><input type="radio" name="q4" value="E"> A. 很多人一起热闹地活动</label>
+            <label class="option"><input type="radio" name="q4" value="I"> B. 和一两个熟人深度交流</label>
+        </div>
+
+        <!-- 第二部分 -->
+        <div class="section-title">第二部分：信息获取</div>
+        <div class="question">
+            <div class="question-title">5. 你更信任：</div>
+            <label class="option"><input type="radio" name="q5" value="S"> A. 实际经验和细节</label>
+            <label class="option"><input type="radio" name="q5" value="N"> B. 直觉和可能性</label>
+        </div>
+        <div class="question">
+            <div class="question-title">6. 你更喜欢：</div>
+            <label class="option"><input type="radio" name="q6" value="S"> A. 有明确步骤的指示</label>
+            <label class="option"><input type="radio" name="q6" value="N"> B. 自己摸索新方法</label>
+        </div>
+        <div class="question">
+            <div class="question-title">7. 你更容易注意到：</div>
+            <label class="option"><input type="radio" name="q7" value="S"> A. 现实中的细节变化</label>
+            <label class="option"><input type="radio" name="q7" value="N"> B. 背后的意义或趋势</label>
+        </div>
+        <div class="question">
+            <div class="question-title">8. 别人描述一个概念时，你更想：</div>
+            <label class="option"><input type="radio" name="q8" value="S"> A. 听到具体例子</label>
+            <label class="option"><input type="radio" name="q8" value="N"> B. 直接理解抽象概念</label>
+        </div>
+
+        <!-- 第三部分 -->
+        <div class="section-title">第三部分：决策方式</div>
+        <div class="question">
+            <div class="question-title">9. 做决定时你更依赖：</div>
+            <label class="option"><input type="radio" name="q9" value="T"> A. 逻辑和客观分析</label>
+            <label class="option"><input type="radio" name="q9" value="F"> B. 个人价值观和他人感受</label>
+        </div>
+        <div class="question">
+            <div class="question-title">10. 你更容易被认为：</div>
+            <label class="option"><input type="radio" name="q10" value="T"> A. 冷静理性</label>
+            <label class="option"><input type="radio" name="q10" value="F"> B. 温暖体贴</label>
+        </div>
+        <div class="question">
+            <div class="question-title">11. 别人向你倾诉时，你更可能：</div>
+            <label class="option"><input type="radio" name="q11" value="T"> A. 给出解决方案</label>
+            <label class="option"><input type="radio" name="q11" value="F"> B. 先安慰情绪</label>
+        </div>
+        <div class="question">
+            <div class="question-title">12. 你更在意：</div>
+            <label class="option"><input type="radio" name="q12" value="T"> A. 事情对不对</label>
+            <label class="option"><input type="radio" name="q12" value="F"> B. 大家舒不舒服</label>
+        </div>
+
+        <!-- 第四部分 -->
+        <div class="section-title">第四部分：生活方式</div>
+        <div class="question">
+            <div class="question-title">13. 你更喜欢：</div>
+            <label class="option"><input type="radio" name="q13" value="J"> A. 提前计划好一切</label>
+            <label class="option"><input type="radio" name="q13" value="P"> B. 灵活应变，边走边看</label>
+        </div>
+        <div class="question">
+            <div class="question-title">14. 你更讨厌：</div>
+            <label class="option"><input type="radio" name="q14" value="J"> A. 临时改变计划</label>
+            <label class="option"><input type="radio" name="q14" value="P"> B. 被固定日程绑死</label>
+        </div>
+        <div class="question">
+            <div class="question-title">15. 你更可能：</div>
+            <label class="option"><input type="radio" name="q15" value="J"> A. 提前完成任务</label>
+            <label class="option"><input type="radio" name="q15" value="P"> B. 临近截止才开始</label>
+        </div>
+        <div class="question">
+            <div class="question-title">16. 你的桌面/房间通常：</div>
+            <label class="option"><input type="radio" name="q16" value="J"> A. 整洁有序</label>
+            <label class="option"><input type="radio" name="q16" value="P"> B. 有点乱但有创意</label>
+        </div>
+
+        <button type="button" class="btn-submit" id="submit-btn" onclick="calculateMBTI()">查看我的 MBTI 结果</button>
+    </form>
+
+    <div class="result-box" id="result-box">
+        <div class="result-emoji" id="result-emoji">🧠</div>
+        <div class="result-title" id="result-type">XXXX</div>
+        <div class="result-name" id="result-name">测试结果</div>
+        <div class="result-desc" id="result-desc">正在分析...</div>
+    </div>
+</div>
+
+<script>
+    // 16种MBTI类型的专属小人Emoji、名称及描述 (来源于第五张图)
+    const mbtiData = {
+        "INTJ": { emoji: "🧙‍♂️", name: "建筑师", desc: "富有想象力和战略思想家，对一切都有计划。" },
+        "INTP": { emoji: "🧑‍🔬", name: "逻辑学家", desc: "具有无限求知欲望的创新发明家。" },
+        "ENTJ": { emoji: "🧑‍✈️", name: "指挥官", desc: "大胆、富有想象力和意志坚强的领导者，总能找到方法，或者创造方法。" },
+        "ENTP": { emoji: "🗣️", name: "辩论家", desc: "聪明且好奇的思想家，无法抗拒智力挑战。" },
+        "INFJ": { emoji: "🧝‍♂️", name: "提倡者", desc: "安静而神秘，却非常鼓舞人心且不知疲倦的理想主义者。" },
+        "INFP": { emoji: "🧚", name: "调停者", desc: "富有诗意、善良和无私的人，总是热衷于帮助美好的事业。" },
+        "ENFJ": { emoji: "🦸‍♂️", name: "主人公", desc: "富有魅力和鼓舞人心的领导者，能够让听众着迷。" },
+        "ENFP": { emoji: "🤹", name: "竞选者", desc: "热情、富有创造力、善于交际的自由精神，总能找到微笑的理由。" },
+        "ISTJ": { emoji: "👮‍♂️", name: "物流师", desc: "务实且注重事实的个人，其可靠性不容置疑。" },
+        "ISFJ": { emoji: "🛡️", name: "守卫者", desc: "非常专注和温暖的保护者，时刻准备保护他们所爱的人。" },
+        "ESTJ": { emoji: "👔", name: "总经理", desc: "优秀的管理者，在管理事物或人员方面无与伦比。" },
+        "ESFJ": { emoji: "🤝", name: "执政官", desc: "非常有爱心、善于交际且受欢迎的，总是乐于助人。" },
+        "ISTP": { emoji: "🔧", name: "鉴赏家", desc: "大胆而务实的实验者，各种工具的大师。" },
+        "ISFP": { emoji: "🎨", name: "探险家", desc: "灵活有魅力的艺术家，时刻准备着探索和体验新鲜事物。" },
+        "ESTP": { emoji: "💼", name: "企业家", desc: "聪明、精力充沛、洞察力敏锐的人，真正享受边缘生活。" },
+        "ESFP": { emoji: "💃", name: "表演家", desc: "自发的、精力充沛、热情的表演者，他们身边的生活永远不会无聊。" }
+    };
+
+    // 用于处理点击选项时的视觉反馈
+    const options = document.querySelectorAll('.option');
+    options.forEach(opt => {
+        opt.addEventListener('click', function() {
+            const name = this.querySelector('input').name;
+            document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+                input.parentElement.classList.remove('selected');
+            });
+            this.classList.add('selected');
+            this.querySelector('input').checked = true;
+        });
+    });
+
+    function calculateMBTI() {
+        const form = document.getElementById('mbti-form');
+        const formData = new FormData(form);
+        
+        let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+        let answered = 0;
+
+        for (let i = 1; i <= 16; i++) {
+            const val = formData.get('q' + i);
+            if (val) {
+                scores[val]++;
+                answered++;
+            }
+        }
+
+        if (answered < 16) {
+            alert("请回答所有 16 道题目后再查看结果哦！");
+            return;
+        }
+
+        // 计算字母组合
+        let result = '';
+        result += scores.E > scores.I ? 'E' : 'I';
+        result += scores.S > scores.N ? 'S' : 'N';
+        result += scores.T > scores.F ? 'T' : 'F';
+        result += scores.J > scores.P ? 'J' : 'P';
+
+        // 获取对应的数据
+        const data = mbtiData[result];
+
+        // 显示结果
+        document.getElementById('mbti-form').style.display = 'none';
+        const resultBox = document.getElementById('result-box');
+        resultBox.style.display = 'block';
+        
+        document.getElementById('result-emoji').innerText = data.emoji;
+        document.getElementById('result-type').innerText = result;
+        document.getElementById('result-name').innerText = "「" + data.name + "」";
+        document.getElementById('result-desc').innerText = data.desc;
+        
+        // 平滑滚动
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
